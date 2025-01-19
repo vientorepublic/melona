@@ -5,8 +5,8 @@ export interface ISongData {
   title: string;
   artist: string;
   album: string;
-  // likeCount: number;
-  // albumImg: string;
+  likeCnt: number;
+  albumImg: string;
 }
 
 export interface IChartData {

@@ -57,6 +57,7 @@ export class MelonChart {
       songs: [],
       songIds: [],
     };
+    const likeCnt = 0;
     table.map((i, el) => {
       const tr = $(el).find("tr");
       tr.map((i, el) => {
@@ -65,6 +66,8 @@ export class MelonChart {
         const title = $(el).find("td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank01 > span > a").text().trim();
         const artist = $(el).find("td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank02 > span > a").text().trim();
         const album = $(el).find("td:nth-child(7) > div.wrap > div.wrap_song_info > div.rank03 > a").text().trim();
+        const reducedAlbumImg = $(el).find("td:nth-child(4) > div.wrap > a > img").attr("src") || "";
+        const albumImg = reducedAlbumImg.split("/melon")[0];
         chart.songIds.push(songNo);
         chart.songs.push({
           songNo,
@@ -72,6 +75,8 @@ export class MelonChart {
           title,
           artist,
           album,
+          likeCnt,
+          albumImg,
         });
       });
     });
@@ -82,8 +87,10 @@ export class MelonChart {
     const html = await this.getHTML();
     const chart = this.parseChart(html);
     const likeCnt = await this.getLikeCnt(chart.songIds);
-    console.log(chart);
-    console.log(likeCnt);
+    chart.songs.map((e, i) => {
+      chart.songs[i].likeCnt = likeCnt.contsLike[i].SUMMCNT;
+    });
+    console.log(chart.songs);
   }
 }
 
