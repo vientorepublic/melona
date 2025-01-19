@@ -19,7 +19,7 @@ export interface IChartData {
 // 멜론차트 좋아요 데이터 타입 매핑
 export interface ISongLikeCntData {
   CONTSID: number;
-  LIKEYN: string; // Maybe type LikeYN
+  LIKEYN: string; // 아마도 LikeYN 타입일 듯.
   SUMMCNT: number;
 }
 

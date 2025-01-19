@@ -26,7 +26,7 @@ export class MelonChart {
 
   public async getLikeCnt(songs: number[]): Promise<ILikeCntList> {
     try {
-      const list = encodeURIComponent(songs.join(","));
+      const list = songs.join(",");
       const params = new URLSearchParams();
       params.append("contsIds", list);
       const req = await axios.get<ILikeCntList>(Config.LIKE_CNT_JSON, {
@@ -34,6 +34,7 @@ export class MelonChart {
         params,
         headers: {
           "User-Agent": Config.USER_AGENT,
+          Referer: Config.DOMAIN + Config.URL,
         },
       });
       return req.data;
