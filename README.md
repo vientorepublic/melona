@@ -4,7 +4,7 @@
 [![stars - melonchart](https://img.shields.io/github/stars/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 [![forks - melonchart](https://img.shields.io/github/forks/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 
-<img width="1312" alt="Screenshot" src="https://github.com/user-attachments/assets/c6b0c7e7-cea8-462e-94ab-8c88147a8bfd" />
+<img width="1312" alt="Screenshot" src="https://github.com/user-attachments/assets/79ac4846-2364-4314-806c-63a3c3c8c043" />
 
 멜론차트 TOP100 크롤러 Typescript 구현체
 
