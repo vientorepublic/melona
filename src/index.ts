@@ -99,7 +99,7 @@ export class MelonChart {
     });
     // Get like count data
     const songIds: number[] = [];
-    chart.map((e, i) => {
+    chart.map((e) => {
       songIds.push(e.songNo);
     });
     const likeCntData = await this.getLikeCnt(songIds);
