@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,10 @@
     "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35"
+    "@eslint/js": "^9.18.0",
+    "@types/cheerio": "^0.22.35",
+    "eslint": "^9.18.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.20.0"
   }
 }
