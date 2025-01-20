@@ -6,15 +6,35 @@
 
 <img width="1312" alt="Screenshot" src="https://github.com/user-attachments/assets/79ac4846-2364-4314-806c-63a3c3c8c043" />
 
-멜론차트 TOP100 크롤러 Typescript 구현체
+멜론차트 TOP100 / 멜론 최신음악 크롤러 Typescript 구현체
 
 ## Features
 
 - Type-safe 코드 / 데이터 타입이 매핑된 인터페이스 제공
 
-- 멜론차트 TOP100의 HTML 테이블의 데이터를 JSON으로 변환
+- 멜론차트 TOP100 & 멜론 최신음악의 HTML 테이블의 데이터를 JSON으로 변환
 
 - 개별 음악의 좋아요 수 JSON 데이터 제공
+
+## How to use
+
+`src` 폴더의 `index.ts`를 참고하세요.
+
+- 멜론차트 TOP100
+
+```javascript
+const melonChart = new MelonChart();
+const chart = await melonChart.getChart();
+console.log(chart);
+```
+
+- 멜론 최신음악
+
+```javascript
+const melonNewMusic = new MelonNewMusic();
+const table = await melonNewMusic.getTable();
+console.log(table);
+```
 
 ## License
 
