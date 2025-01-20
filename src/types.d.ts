@@ -24,3 +24,14 @@ export interface ILikeCntList {
   httpsDomain: string;
   staticDomain: string;
 }
+
+// 멜론뮤직 최신음악 테이블
+export interface INewMusicData {
+  num: number;
+  songNo: number;
+  title: string;
+  artist: string;
+  album: string;
+  likeCnt: number;
+  albumImg: string;
+}
