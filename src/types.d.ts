@@ -1,5 +1,5 @@
 // 차트 JSON 데이터 매핑
-export interface ISongData {
+export interface IChartData {
   songNo: number;
   rank: number;
   title: string;
@@ -7,11 +7,6 @@ export interface ISongData {
   album: string;
   likeCnt: number;
   albumImg: string;
-}
-
-export interface IChartData {
-  songs: ISongData[];
-  songIds: number[];
 }
 
 // export type LikeYN = 'Y' | 'N';

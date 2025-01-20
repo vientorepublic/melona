@@ -49,15 +49,13 @@ export class MelonChart {
     }
   }
 
-  public parseChart(html: string): IChartData {
+  public async parseChart(html: string): Promise<IChartData[]> {
     const $ = cheerio.load(html);
     const body = $("body");
     const table = body.find("table > tbody");
-    const chart: IChartData = {
-      songs: [],
-      songIds: [],
-    };
+    const chart: IChartData[] = [];
     const likeCnt = 0;
+    // Parse chart table
     table.map((i, el) => {
       const tr = $(el).find("tr");
       tr.map((i, el) => {
@@ -68,8 +66,7 @@ export class MelonChart {
         const album = $(el).find("td:nth-child(7) > div.wrap > div.wrap_song_info > div.rank03 > a").text().trim();
         const reducedAlbumImg = $(el).find("td:nth-child(4) > div.wrap > a > img").attr("src") || "";
         const albumImg = reducedAlbumImg.split("/melon")[0];
-        chart.songIds.push(songNo);
-        chart.songs.push({
+        chart.push({
           songNo,
           rank,
           title,
@@ -80,17 +77,22 @@ export class MelonChart {
         });
       });
     });
+    // Get like count data
+    const songIds: number[] = [];
+    chart.map((e, i) => {
+      songIds.push(e.songNo);
+    });
+    const likeCntData = await this.getLikeCnt(songIds);
+    chart.map((e, i) => {
+      chart[i].likeCnt = likeCntData.contsLike[i].SUMMCNT;
+    });
     return chart;
   }
 
   public async main(): Promise<void> {
     const html = await this.getHTML();
-    const chart = this.parseChart(html);
-    const likeCnt = await this.getLikeCnt(chart.songIds);
-    chart.songs.map((e, i) => {
-      chart.songs[i].likeCnt = likeCnt.contsLike[i].SUMMCNT;
-    });
-    console.log(chart.songs);
+    const chart = await this.parseChart(html);
+    console.log(chart);
   }
 }
 
