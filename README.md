@@ -29,6 +29,7 @@
 const melonSearch = new MelonSearch();
 const data = await melonSearch.searchSong({
   query: '윤하', // 실제 검색어로 치환하세요.
+  section: 'artist', // 사용 가능한 옵션: all, artist, song, album
 });
 console.log(data);
 ```
