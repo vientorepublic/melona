@@ -4,6 +4,8 @@
 [![stars - melonchart](https://img.shields.io/github/stars/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 [![forks - melonchart](https://img.shields.io/github/forks/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 
+![og_image](https://github.com/user-attachments/assets/fcf7f8af-3492-4b91-8ac6-9538094a65a5)
+
 [멜론](https://www.melon.com/) 음원 서비스의 여러 데이터를 JSON으로 변환하는 Typescript 구현체
 
 ## Features
