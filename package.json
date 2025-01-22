@@ -1,7 +1,7 @@
 {
-  "name": "melonchart",
+  "name": "melona",
   "version": "1.0.0",
-  "description": "멜론차트 TOP100 크롤러 Typescript 구현체",
+  "description": "멜론 음원 서비스의 여러 데이터를 JSON으로 변환하는 Typescript 구현체",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
