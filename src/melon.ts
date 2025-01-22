@@ -161,17 +161,12 @@ export class MelonNewMusic {
       const tr = $(el).find('tr');
       tr.map((i, el) => {
         const num = i + 1;
-        // TODO: more simplify
-        const songNoStr = (
-          $(el)
-            .find(
-              'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank01 > span > a',
-            )
-            .attr('href') || ''
-        )
-          .split(',')[1]
-          .replace(/\);/, '');
-        const songNo = Number(songNoStr) || 0;
+        const songNo =
+          Number(
+            $(el)
+              .find('td:nth-child(7) > div.wrap > button')
+              .attr('data-song-no'),
+          ) || 0;
         const title = $(el)
           .find(
             'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank01 > span > a',
