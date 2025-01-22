@@ -35,11 +35,11 @@ export class MelonSearch {
           .text()
           .trim();
         const artist = $(el)
-          .find('td:nth-child(4) > div.wrap > div#artistName > a')
+          .find('td:nth-child(4) > div.wrap > div#artistName > span')
           .text()
           .trim();
         const album = $(el)
-          .find('td:nth-child(5) > div.wrap > div.ellipsis > a')
+          .find('td:nth-child(5) > div.wrap > div.ellipsis')
           .text()
           .trim();
         data.push({
@@ -65,9 +65,12 @@ export class MelonSearch {
   }
 
   public async searchSong(params: ISearchParams): Promise<ISearchSong[]> {
-    const { query } = params;
+    const { query, section } = params;
     const queryParams = new URLSearchParams();
     queryParams.append('q', query);
+    if (section) {
+      queryParams.append('section', section);
+    }
     const html = await this.http.getHTML(Config.SEARCH_URL, queryParams);
     const data = await this.parseTable(html);
     return data;
@@ -86,7 +89,6 @@ export class MelonChart {
     const table = body.find('table > tbody');
     const chart: IChartData[] = [];
     const likeCnt = 0;
-    // Parse chart table
     table.map((i, el) => {
       const tr = $(el).find('tr');
       tr.map((i, el) => {
@@ -94,20 +96,18 @@ export class MelonChart {
         const songNo = Number($(el).attr('data-song-no')) || 0;
         const title = $(el)
           .find(
-            'td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank01 > span > a',
+            'td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank01 > span',
           )
           .text()
           .trim();
         const artist = $(el)
           .find(
-            'td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank02 > span > a',
+            'td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank02 > span',
           )
           .text()
           .trim();
         const album = $(el)
-          .find(
-            'td:nth-child(7) > div.wrap > div.wrap_song_info > div.rank03 > a',
-          )
+          .find('td:nth-child(7) > div.wrap > div.wrap_song_info > div.rank03')
           .text()
           .trim();
         const reducedAlbumImg =
@@ -169,20 +169,18 @@ export class MelonNewMusic {
           ) || 0;
         const title = $(el)
           .find(
-            'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank01 > span > a',
+            'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank01 > span',
           )
           .text()
           .trim();
         const artist = $(el)
           .find(
-            'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank02 > span > a',
+            'td:nth-child(5) > div.wrap > div.wrap_song_info > div.rank02 > span',
           )
           .text()
           .trim();
         const album = $(el)
-          .find(
-            'td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank03 > a',
-          )
+          .find('td:nth-child(6) > div.wrap > div.wrap_song_info > div.rank03')
           .text()
           .trim();
         const reducedAlbumImg =

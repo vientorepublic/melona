@@ -18,6 +18,7 @@ async function melonSearch() {
   const melonSearch = new MelonSearch();
   const data = await melonSearch.searchSong({
     query: '윤하',
+    section: 'song',
   });
   console.log(data);
 }

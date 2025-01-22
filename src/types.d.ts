@@ -6,8 +6,11 @@ export interface ISongData {
   likeCnt: number;
 }
 
+export type SearchSection = 'all' | 'artist' | 'song' | 'album';
+
 export interface ISearchParams {
   query: string;
+  section?: SearchSection;
 }
 
 export interface ISearchSong extends ISongData {
