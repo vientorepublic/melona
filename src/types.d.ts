@@ -1,20 +1,29 @@
-// 차트 JSON 데이터 매핑
-export interface IChartData {
+export interface ISongData {
   songNo: number;
-  rank: number;
   title: string;
   artist: string;
   album: string;
   likeCnt: number;
+}
+
+export interface ISearchParams {
+  query: string;
+}
+
+export interface ISearchSong extends ISongData {
+  num: number;
+}
+
+export interface IChartData extends ISongData {
+  rank: number;
   albumImg: string;
 }
 
-// export type LikeYN = 'Y' | 'N';
+export type LikeYN = 'Y' | 'N';
 
-// 멜론차트 좋아요 데이터 타입 매핑
 export interface ISongLikeCntData {
   CONTSID: number;
-  LIKEYN: string; // 아마도 LikeYN 타입일 듯.
+  LIKEYN: LikeYN;
   SUMMCNT: number;
 }
 
@@ -25,13 +34,8 @@ export interface ILikeCntList {
   staticDomain: string;
 }
 
-// 멜론뮤직 최신음악 테이블
-export interface INewMusicData {
+export interface INewMusicData extends ISongData {
   num: number;
   songNo: number;
-  title: string;
-  artist: string;
-  album: string;
-  likeCnt: number;
   albumImg: string;
 }

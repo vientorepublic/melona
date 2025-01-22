@@ -3,9 +3,10 @@ import type { ILikeCntList } from './types';
 import { Config } from './config';
 
 export class HTTP {
-  public async getHTML(url: string): Promise<string> {
+  public async getHTML(url: string, params?: URLSearchParams): Promise<string> {
     try {
       const req = await axios.get<string>(url, {
+        params,
         baseURL: Config.DOMAIN,
         headers: {
           'User-Agent': Config.USER_AGENT,
