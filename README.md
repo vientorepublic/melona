@@ -28,30 +28,36 @@ npm install melona
 - 멜론 음악 검색
 
 ```javascript
-const { MelonSearch } = require('melona');
+import { MelonSearch } from 'melona';
+
 const melonSearch = new MelonSearch();
 const data = await melonSearch.searchSong({
   query: '윤하', // 실제 검색어로 치환하세요.
   section: 'artist', // 사용 가능한 옵션: all, artist, song, album
 });
+
 console.log(data);
 ```
 
 - 멜론차트 TOP100
 
 ```javascript
-const { MelonChart } = require('melona');
+import { MelonChart } from 'melona';
+
 const melonChart = new MelonChart();
 const chart = await melonChart.getChart();
+
 console.log(chart);
 ```
 
 - 멜론 최신음악
 
 ```javascript
-const { MelonNewMusic } = require('melona');
+import { MelonNewMusic } from 'melona';
+
 const melonNewMusic = new MelonNewMusic();
 const table = await melonNewMusic.getTable();
+
 console.log(table);
 ```
 
