@@ -1,11 +1,10 @@
 {
   "name": "melona",
   "version": "1.0.0",
-  "description": "멜론 음원 서비스의 여러 데이터를 JSON으로 변환하는 Typescript 구현체",
-  "main": "index.js",
+  "description": "멜론 음원 서비스의 여러 데이터를 JSON으로 변환하는 크롤러",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node ./dist/index.js",
     "lint": "eslint \"{src,apps,libs}/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
   },
@@ -15,6 +14,10 @@
   },
   "author": "vientorepublic",
   "license": "MIT",
+  "keywords": [
+    "melon",
+    "web crawling"
+  ],
   "bugs": {
     "url": "https://github.com/vientorepublic/melonchart/issues"
   },
