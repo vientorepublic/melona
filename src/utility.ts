@@ -1,6 +1,20 @@
 import axios, { isAxiosError } from 'axios';
-import type { ILikeCntList } from './types';
 import { Config } from './config';
+
+export type LikeYN = 'Y' | 'N';
+
+export interface ISongLikeCntData {
+  CONTSID: number;
+  LIKEYN: LikeYN;
+  SUMMCNT: number;
+}
+
+export interface ILikeCntList {
+  contsLike: ISongLikeCntData[];
+  httpDomain: string;
+  httpsDomain: string;
+  staticDomain: string;
+}
 
 export class HTTP {
   public async getHTML(url: string, params?: URLSearchParams): Promise<string> {

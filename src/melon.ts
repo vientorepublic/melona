@@ -1,12 +1,36 @@
-import type {
-  IChartData,
-  INewMusicData,
-  ISearchParams,
-  ISearchSong,
-} from './types';
 import { HTTP, Utility } from './utility';
 import * as cheerio from 'cheerio';
 import { Config } from './config';
+
+export interface ISongData {
+  songNo: number;
+  title: string;
+  artist: string;
+  album: string;
+  likeCnt: number;
+}
+
+export type SearchSection = 'all' | 'artist' | 'song' | 'album';
+
+export interface ISearchParams {
+  query: string;
+  section?: SearchSection;
+}
+
+export interface ISearchSong extends ISongData {
+  num: number;
+}
+
+export interface IChartData extends ISongData {
+  rank: number;
+  albumImg: string;
+}
+
+export interface INewMusicData extends ISongData {
+  num: number;
+  songNo: number;
+  albumImg: string;
+}
 
 export class MelonSearch {
   private http: HTTP;
