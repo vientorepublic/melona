@@ -148,7 +148,6 @@ export class MelonChart {
         });
       });
     });
-    // Get like count data
     const songIds: number[] = [];
     chart.map((e) => {
       songIds.push(e.songNo);
@@ -180,7 +179,6 @@ export class MelonNewMusic {
     const table = body.find('table > tbody');
     const chart: INewMusicData[] = [];
     const likeCnt = 0;
-    // Parse music table
     table.map((i, el) => {
       const tr = $(el).find('tr');
       tr.map((i, el) => {
@@ -221,7 +219,6 @@ export class MelonNewMusic {
         });
       });
     });
-    // Get like count data
     const songIds: number[] = [];
     chart.map((e) => {
       songIds.push(e.songNo);

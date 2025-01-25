@@ -10,18 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vientorepublic/melonchart.git"
+    "url": "git+https://github.com/vientorepublic/melona.git"
   },
   "author": "vientorepublic",
   "license": "MIT",
   "keywords": [
     "melon",
-    "web crawling"
+    "web crawler",
+    "web scraper"
   ],
   "bugs": {
-    "url": "https://github.com/vientorepublic/melonchart/issues"
+    "url": "https://github.com/vientorepublic/melona/issues"
   },
-  "homepage": "https://github.com/vientorepublic/melonchart#readme",
+  "homepage": "https://github.com/vientorepublic/melona#readme",
   "dependencies": {
     "axios": "^1.7.9",
     "cheerio": "^1.0.0"
