@@ -4,6 +4,8 @@
 [![stars - melonchart](https://img.shields.io/github/stars/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 [![forks - melonchart](https://img.shields.io/github/forks/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
 [![npm version](https://badge.fury.io/js/melona.svg)](https://badge.fury.io/js/melona)
+[![Build](https://github.com/vientorepublic/melona/actions/workflows/build.yml/badge.svg)](https://github.com/vientorepublic/melona/actions/workflows/build.yml)
+[![Test](https://github.com/vientorepublic/melona/actions/workflows/test.yml/badge.svg)](https://github.com/vientorepublic/melona/actions/workflows/test.yml)
 
 [![https://nodei.co/npm/melona.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/melona.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/melona)
 
