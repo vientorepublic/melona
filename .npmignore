@@ -1,3 +1,4 @@
 src/
 !/dist/**
 .github/
+coverage/
