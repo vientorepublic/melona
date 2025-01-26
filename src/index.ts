@@ -1,1 +1,1 @@
-export { MelonSearch, MelonChart, MelonNewMusic } from './melon';
+export { MelonSearch, MelonChart, MelonNewMusic, MelonKeywords } from './melon';
