@@ -3,8 +3,8 @@ import { HTTP, Utility } from './utility';
 const http = new HTTP();
 const utility = new Utility();
 
-describe('Utility', () => {
-  test('getLikeCnt method should be return like count', async () => {
+describe('getLikeCnt', () => {
+  test('should be return like count', async () => {
     const data = await utility.getLikeCnt([1]);
     expect(typeof data.contsLike[0].SUMMCNT).toBe('number');
   });
@@ -15,7 +15,7 @@ describe('getHTML', () => {
     const data = await http.getHTML('https://www.google.com');
     expect(typeof data).toBe('string');
   });
-  test('must return an Error instance when an error occurs', () => {
+  test('should return an Error instance when an error occurs', () => {
     expect(async () => {
       await http.getHTML('https://www.google.com/404');
     }).rejects.toThrow(Error);

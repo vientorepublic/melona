@@ -14,27 +14,46 @@ function getRandomString(length: number): string {
 }
 
 describe('MelonSearch', () => {
-  test('array length must be 0 when no result', async () => {
+  test('searchSong: array length should be 0 when no result', async () => {
     const melonSearch = new MelonSearch();
+    const query = getRandomString(10);
     const search = await melonSearch.searchSong({
-      query: getRandomString(10),
+      query,
     });
     expect(search).toHaveLength(0);
+  });
+  test('parseTable: array length should be 0 when no result', async () => {
+    const melonSearch = new MelonSearch();
+    const randomStr = getRandomString(10);
+    const table = await melonSearch.parseTable(randomStr);
+    expect(table).toHaveLength(0);
   });
 });
 
 describe('MelonChart', () => {
-  test('array length must be 100', async () => {
+  test('array length should be 100', async () => {
     const melonChart = new MelonChart();
     const chart = await melonChart.getChart();
     expect(chart).toHaveLength(100);
   });
+  test('array length should be 0 when no result', async () => {
+    const melonChart = new MelonChart();
+    const randomStr = getRandomString(10);
+    const table = await melonChart.parseChart(randomStr);
+    expect(table).toHaveLength(0);
+  });
 });
 
 describe('MelonNewMusic', () => {
-  test('array length must be 50', async () => {
+  test('array length should be 50', async () => {
     const melonNewMusic = new MelonNewMusic();
     const table = await melonNewMusic.getTable();
     expect(table).toHaveLength(50);
+  });
+  test('array length should be 0 when no result', async () => {
+    const melonNewMusic = new MelonNewMusic();
+    const randomStr = getRandomString(10);
+    const table = await melonNewMusic.parseTable(randomStr);
+    expect(table).toHaveLength(0);
   });
 });
