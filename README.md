@@ -21,6 +21,7 @@
   - 멜론차트 TOP100
   - 멜론 최신 음악
   - 멜론 음악 검색
+  - 멜론 인기 키워드
 
 ## How to use
 
@@ -64,6 +65,18 @@ const melonNewMusic = new MelonNewMusic();
 const table = await melonNewMusic.getTable();
 
 console.log(table);
+```
+
+- 멜론 인기 키워드
+
+```javascript
+import { MelonKeywords } from 'melona';
+
+const melonKeywords = new MelonKeywords();
+const keywords = await melonKeywords.getKeywords();
+
+console.log(keywords.trending); // 실시간 급상승 키워드
+console.log(keywords.popular); // 인기 키워드
 ```
 
 ## License
