@@ -1,1 +1,12 @@
-export { MelonSearch, MelonChart, MelonNewMusic, MelonKeywords } from './melon';
+export interface ISongData {
+  songNo: number;
+  title: string;
+  artist: string;
+  album: string;
+  likeCnt: number;
+}
+
+export { MelonNewMusic } from './new_music';
+export { MelonKeywords } from './keywords';
+export { MelonSearch } from './search';
+export { MelonChart } from './chart';
