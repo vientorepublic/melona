@@ -18,10 +18,13 @@
 <img width="1312" alt="Screenshot" src="https://github.com/user-attachments/assets/79ac4846-2364-4314-806c-63a3c3c8c043" />
 
 - 멜론 웹 사이트의 다양한 종류의 데이터를 JSON으로 변환
+
   - 멜론차트 TOP100
   - 멜론 최신 음악
   - 멜론 음악 검색
   - 멜론 인기 키워드
+
+- 내장 타입 선언(d.ts) 제공
 
 ## How to use
 
