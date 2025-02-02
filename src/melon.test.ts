@@ -1,17 +1,5 @@
 import { MelonChart, MelonKeywords, MelonNewMusic, MelonSearch } from './melon';
-
-function getRandomString(length: number): string {
-  let result = '';
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  let counter = 0;
-  while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    counter += 1;
-  }
-  return result;
-}
+import { randomBytes } from 'crypto';
 
 describe('MelonKeywords', () => {
   test('trending: array length should be 10', async () => {
@@ -29,7 +17,7 @@ describe('MelonKeywords', () => {
 describe('MelonSearch', () => {
   test('searchSong: array length should be 0 when no result', async () => {
     const melonSearch = new MelonSearch();
-    const query = getRandomString(10);
+    const query = randomBytes(10).toString('hex');
     const search = await melonSearch.searchSong({
       query,
     });
@@ -37,7 +25,7 @@ describe('MelonSearch', () => {
   });
   test('parseTable: array length should be 0 when no result', async () => {
     const melonSearch = new MelonSearch();
-    const randomStr = getRandomString(10);
+    const randomStr = randomBytes(10).toString('hex');
     const table = await melonSearch.parseTable(randomStr);
     expect(table).toHaveLength(0);
   });
