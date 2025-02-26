@@ -1,4 +1,4 @@
-# Melona🍈 - Melon API
+# Melona🍈 - 멜론 API 비공식 구현
 
 [![License](https://img.shields.io/badge/License-MIT-blue)](#license)
 [![stars - melonchart](https://img.shields.io/github/stars/vientorepublic/melonchart?style=social)](https://github.com/vientorepublic/melonchart)
@@ -11,7 +11,7 @@
 
 ![og_image](https://github.com/user-attachments/assets/fcf7f8af-3492-4b91-8ac6-9538094a65a5)
 
-[멜론](https://www.melon.com) 음원 서비스의 여러 데이터를 쉽게 스크래핑 할 수 있는 API
+[멜론](https://www.melon.com) 음원 서비스의 여러 데이터를 쉽게 스크래핑 할 수 있는 API 입니다.
 
 ## Features
 
@@ -26,15 +26,25 @@
 
 - 내장 타입 선언(d.ts) 제공
 
-## How to use
-
-- 모듈 설치
+## Install
 
 ```
 npm install melona
 ```
 
-- 멜론 음악 검색
+## Base Types
+
+```typescript
+interface ISongData {
+  songNo: number;
+  title: string;
+  artist: string;
+  album: string;
+  likeCnt: number;
+}
+```
+
+## searchSong(params: ISearchParams) => ISearchSong[]
 
 ```javascript
 import { MelonSearch } from 'melona';
@@ -48,7 +58,21 @@ const data = await melonSearch.searchSong({
 console.log(data);
 ```
 
-- 멜론차트 TOP100
+```typescript
+type SearchSection = 'all' | 'artist' | 'song' | 'album';
+interface ISearchParams {
+  query: string;
+  section?: SearchSection;
+}
+```
+
+```typescript
+interface ISearchSong extends ISongData {
+  num: number;
+}
+```
+
+## getChart() => IChartData[]
 
 ```javascript
 import { MelonChart } from 'melona';
@@ -59,7 +83,14 @@ const chart = await melonChart.getChart();
 console.log(chart);
 ```
 
-- 멜론 최신음악
+```typescript
+interface IChartData extends ISongData {
+  rank: number;
+  albumImg: string;
+}
+```
+
+## getTable() => INewMusicData[]
 
 ```javascript
 import { MelonNewMusic } from 'melona';
@@ -70,7 +101,15 @@ const table = await melonNewMusic.getTable();
 console.log(table);
 ```
 
-- 멜론 인기 키워드
+```typescript
+interface INewMusicData extends ISongData {
+  num: number;
+  songNo: number;
+  albumImg: string;
+}
+```
+
+## getKeywords() => IKeywordChart
 
 ```javascript
 import { MelonKeywords } from 'melona';
@@ -80,6 +119,18 @@ const keywords = await melonKeywords.getKeywords();
 
 console.log(keywords.trending); // 실시간 급상승 키워드
 console.log(keywords.popular); // 인기 키워드
+```
+
+```typescript
+interface IKeyword {
+  rank: number;
+  keyword: string;
+  rankChanges: string;
+}
+interface IKeywordChart {
+  trending: IKeyword[];
+  popular: IKeyword[];
+}
 ```
 
 ## License
