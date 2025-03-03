@@ -24,6 +24,8 @@
   - 멜론 음악 검색
   - 멜론 인기 키워드
 
+- 비동기(async/await) 지원
+
 - 내장 타입 선언(d.ts) 제공
 
 ## Install
@@ -44,7 +46,7 @@ interface ISongData {
 }
 ```
 
-## searchSong(params: ISearchParams) => ISearchSong[]
+## searchSong(params: ISearchParams) => Promise<ISearchSong[]>
 
 ```javascript
 import { MelonSearch } from 'melona';
@@ -72,7 +74,7 @@ interface ISearchSong extends ISongData {
 }
 ```
 
-## getChart() => IChartData[]
+## getChart() => Promise<IChartData[]>
 
 ```javascript
 import { MelonChart } from 'melona';
@@ -90,7 +92,7 @@ interface IChartData extends ISongData {
 }
 ```
 
-## getTable() => INewMusicData[]
+## getTable() => Promise<INewMusicData[]>
 
 ```javascript
 import { MelonNewMusic } from 'melona';
@@ -109,7 +111,7 @@ interface INewMusicData extends ISongData {
 }
 ```
 
-## getKeywords() => IKeywordChart
+## getKeywords() => Promise\<IKeywordChart>
 
 ```javascript
 import { MelonKeywords } from 'melona';
