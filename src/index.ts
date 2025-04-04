@@ -6,6 +6,13 @@ export interface ISongData {
   likeCnt: number;
 }
 
+export enum SearchSection {
+  ALL = 'all',
+  ARTIST = 'artist',
+  SONG = 'song',
+  ALBUM = 'album',
+}
+
 export { MelonNewMusic } from './new_music';
 export { MelonKeywords } from './keywords';
 export { MelonSearch } from './search';
