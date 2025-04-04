@@ -3,7 +3,12 @@ import type { ISongData } from '.';
 import * as cheerio from 'cheerio';
 import { Config } from './config';
 
-export type SearchSection = 'all' | 'artist' | 'song' | 'album';
+export enum SearchSection {
+  ALL = 'all',
+  ARTIST = 'artist',
+  SONG = 'song',
+  ALBUM = 'album',
+}
 
 export interface ISearchParams {
   query: string;
