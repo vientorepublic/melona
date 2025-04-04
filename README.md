@@ -61,7 +61,16 @@ console.log(data);
 ```
 
 ```typescript
-type SearchSection = 'all' | 'artist' | 'song' | 'album';
+// Deprecated: v2.0.0
+// type SearchSection = 'all' | 'artist' | 'song' | 'album';
+
+export enum SearchSection {
+  ALL = 'all',
+  ARTIST = 'artist',
+  SONG = 'song',
+  ALBUM = 'album',
+}
+
 interface ISearchParams {
   query: string;
   section?: SearchSection;
