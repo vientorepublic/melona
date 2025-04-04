@@ -1,4 +1,4 @@
-import { MelonSearch } from './search';
+import { MelonSearch, SearchSection } from './search';
 import { randomBytes } from 'crypto';
 
 describe('MelonSearch', () => {
@@ -9,6 +9,15 @@ describe('MelonSearch', () => {
       query,
     });
     expect(search).toHaveLength(0);
+  });
+  test('searchSong: array length should not be 0 when result', async () => {
+    const melonSearch = new MelonSearch();
+    const query = '아이유';
+    const search = await melonSearch.searchSong({
+      section: SearchSection.ARTIST,
+      query,
+    });
+    expect(search).not.toHaveLength(0);
   });
   test('parseTable: array length should be 0 when no result', async () => {
     const melonSearch = new MelonSearch();
