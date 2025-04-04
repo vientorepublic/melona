@@ -12,7 +12,7 @@ describe('MelonSearch', () => {
   });
   test('searchSong: array length should not be 0 when result', async () => {
     const melonSearch = new MelonSearch();
-    const query = '아이유';
+    const query = '윤하';
     const search = await melonSearch.searchSong({
       section: SearchSection.ARTIST,
       query,
