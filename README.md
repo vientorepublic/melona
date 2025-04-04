@@ -61,7 +61,7 @@ console.log(data);
 ```
 
 ```typescript
-// Deprecated: v1.2.4
+// Deprecated: v2.0.0
 // type SearchSection = 'all' | 'artist' | 'song' | 'album';
 
 export enum SearchSection {
