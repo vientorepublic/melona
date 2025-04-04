@@ -1,14 +1,7 @@
 import { HTTP, Utility } from './utility';
-import type { ISongData } from '.';
+import type { ISongData, SearchSection } from '.';
 import * as cheerio from 'cheerio';
 import { Config } from './config';
-
-export enum SearchSection {
-  ALL = 'all',
-  ARTIST = 'artist',
-  SONG = 'song',
-  ALBUM = 'album',
-}
 
 export interface ISearchParams {
   query: string;

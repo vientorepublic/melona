@@ -1,4 +1,5 @@
-import { MelonSearch, SearchSection } from './search';
+import { SearchSection } from '.';
+import { MelonSearch } from './search';
 import { randomBytes } from 'crypto';
 
 describe('MelonSearch', () => {
