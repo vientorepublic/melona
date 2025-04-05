@@ -49,21 +49,18 @@ interface ISongData {
 ## searchSong(params: ISearchParams) => Promise<ISearchSong[]>
 
 ```javascript
-import { MelonSearch } from 'melona';
+import { MelonSearch, SearchSection } from 'melona';
 
 const melonSearch = new MelonSearch();
 const data = await melonSearch.searchSong({
   query: '윤하', // 실제 검색어로 치환하세요.
-  section: SearchSection.ARTIST,
+  section: SearchSection.ARTIST, // ALL, ARTIST, SONG, ALBUM
 });
 
 console.log(data);
 ```
 
 ```typescript
-// Deprecated: v2.0.0
-// type SearchSection = 'all' | 'artist' | 'song' | 'album';
-
 export enum SearchSection {
   ALL = 'all',
   ARTIST = 'artist',
