@@ -13,26 +13,43 @@
 
 [멜론](https://www.melon.com) 음원 서비스의 여러 데이터를 쉽게 스크래핑 할 수 있는 API 입니다.
 
+---
+
+## 📖 Table of Contents
+
+- [Features](#features)
+- [Install](#install)
+- [Base Types](#base-types)
+- [API Methods](#api-methods)
+  - [searchSong](#searchsongparams-isearchparams--promiseisearchsong)
+  - [getChart](#getchart--promiseichartdata)
+  - [getTable](#gettable--promisenewmusicdata)
+  - [getKeywords](#getkeywords--promiseikeywordchart)
+- [License](#license)
+
+---
+
 ## Features
 
 <img width="1312" alt="Screenshot" src="https://github.com/user-attachments/assets/79ac4846-2364-4314-806c-63a3c3c8c043" />
 
-- 멜론 웹 사이트의 다양한 종류의 데이터를 JSON으로 변환
-
+- 멜론 웹 사이트의 다양한 종류의 데이터를 JSON으로 변환:
   - 멜론차트 TOP100
   - 멜론 최신 음악
   - 멜론 음악 검색
   - 멜론 인기 키워드
-
 - 비동기(async/await) 지원
-
 - 내장 타입 선언(d.ts) 제공
+
+---
 
 ## Install
 
-```
+```bash
 npm install melona
 ```
+
+---
 
 ## Base Types
 
@@ -46,24 +63,25 @@ interface ISongData {
 }
 ```
 
-## searchSong(params: ISearchParams) => Promise<ISearchSong[]>
+---
+
+## API Methods
+
+### searchSong(params: ISearchParams) => Promise<ISearchSong[]>
 
 ```javascript
-import { MelonSearch } from 'melona';
+import { MelonSearch, SearchSection } from 'melona';
 
 const melonSearch = new MelonSearch();
 const data = await melonSearch.searchSong({
   query: '윤하', // 실제 검색어로 치환하세요.
-  section: SearchSection.ARTIST,
+  section: SearchSection.ARTIST, // ALL, ARTIST, SONG, ALBUM
 });
 
 console.log(data);
 ```
 
 ```typescript
-// Deprecated: v2.0.0
-// type SearchSection = 'all' | 'artist' | 'song' | 'album';
-
 export enum SearchSection {
   ALL = 'all',
   ARTIST = 'artist',
@@ -75,15 +93,15 @@ interface ISearchParams {
   query: string;
   section?: SearchSection;
 }
-```
 
-```typescript
 interface ISearchSong extends ISongData {
   num: number;
 }
 ```
 
-## getChart() => Promise<IChartData[]>
+---
+
+### getChart() => Promise<IChartData[]>
 
 ```javascript
 import { MelonChart } from 'melona';
@@ -101,7 +119,9 @@ interface IChartData extends ISongData {
 }
 ```
 
-## getTable() => Promise<INewMusicData[]>
+---
+
+### getTable() => Promise<INewMusicData[]>
 
 ```javascript
 import { MelonNewMusic } from 'melona';
@@ -120,7 +140,9 @@ interface INewMusicData extends ISongData {
 }
 ```
 
-## getKeywords() => Promise\<IKeywordChart>
+---
+
+### getKeywords() => Promise<IKeywordChart>
 
 ```javascript
 import { MelonKeywords } from 'melona';
@@ -143,6 +165,8 @@ interface IKeywordChart {
   popular: IKeyword[];
 }
 ```
+
+---
 
 ## License
 
