@@ -1,4 +1,5 @@
-import axios, { isAxiosError } from 'axios';
+import { request } from 'https';
+import { URL } from 'url';
 import { Config } from './config';
 
 export type LikeYN = 'Y' | 'N';
@@ -18,54 +19,94 @@ export interface ILikeCntList {
 
 export class HTTP {
   public async getHTML(url: string, params?: URLSearchParams): Promise<string> {
-    try {
-      const req = await axios.get<string>(url, {
-        params,
-        baseURL: Config.DOMAIN,
+    return new Promise((resolve, reject) => {
+      const urlObj = new URL(url, Config.DOMAIN);
+      if (params) {
+        urlObj.search = params.toString();
+      }
+
+      const options = {
         headers: {
           'User-Agent': Config.USER_AGENT,
         },
+      };
+
+      const req = request(urlObj, options, (res) => {
+        if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+          reject(
+            new Error(
+              `Invalid response: ${res.statusCode} ${res.statusMessage}`,
+            ),
+          );
+          return;
+        }
+
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        res.on('end', () => {
+          resolve(data);
+        });
       });
-      return req.data;
-    } catch (err) {
-      if (isAxiosError(err) && err.response) {
-        throw new Error(
-          `Invalid response: ${err.response.status} ${err.response.statusText}`,
-        );
-      } else if (err instanceof Error) {
-        throw new Error(err.message);
-      } else {
-        throw new Error('Unknown Error');
-      }
-    }
+
+      req.on('error', (err) => {
+        reject(err);
+      });
+
+      req.end();
+    });
   }
 }
 
 export class Utility {
   public async getLikeCnt(songs: number[]): Promise<ILikeCntList> {
-    try {
+    return new Promise((resolve, reject) => {
       const list = songs.join(',');
       const params = new URLSearchParams();
       params.append('contsIds', list);
-      const req = await axios.get<ILikeCntList>(Config.LIKE_CNT_JSON, {
-        baseURL: Config.DOMAIN,
-        params,
+
+      const urlObj = new URL(Config.LIKE_CNT_JSON, Config.DOMAIN);
+      urlObj.search = params.toString();
+
+      const options = {
         headers: {
           'User-Agent': Config.USER_AGENT,
           Referer: Config.DOMAIN + Config.CHART_URL,
         },
+      };
+
+      const req = request(urlObj, options, (res) => {
+        if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+          reject(
+            new Error(
+              `Invalid response: ${res.statusCode} ${res.statusMessage}`,
+            ),
+          );
+          return;
+        }
+
+        let data = '';
+        res.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        res.on('end', () => {
+          try {
+            const jsonData = JSON.parse(data) as ILikeCntList;
+            resolve(jsonData);
+          } catch (err) {
+            reject(err);
+          }
+        });
       });
-      return req.data;
-    } catch (err) {
-      if (isAxiosError(err) && err.response) {
-        throw new Error(
-          `Invalid response: ${err.response.status} ${err.response.statusText}`,
-        );
-      } else if (err instanceof Error) {
-        throw new Error(err.message);
-      } else {
-        throw new Error('Unknown Error');
-      }
-    }
+
+      req.on('error', (err) => {
+        reject(err);
+      });
+
+      req.end();
+    });
   }
 }

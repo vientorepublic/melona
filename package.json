@@ -1,6 +1,6 @@
 {
   "name": "melona",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "멜론 음원 서비스의 여러 데이터를 JSON으로 변환하는 크롤러",
   "main": "./dist/index.js",
   "scripts": {
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/vientorepublic/melona#readme",
   "dependencies": {
-    "axios": "^1.7.9",
     "cheerio": "^1.0.0"
   },
   "devDependencies": {
