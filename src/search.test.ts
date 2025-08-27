@@ -18,12 +18,14 @@ describe('MelonSearch', () => {
       section: SearchSection.ARTIST,
       query,
     });
+    console.log(search);
     expect(search).not.toHaveLength(0);
   });
   test('parseTable: array length should be 0 when no result', async () => {
     const melonSearch = new MelonSearch();
     const randomStr = randomBytes(10).toString('hex');
     const table = await melonSearch.parseTable(randomStr);
+    console.log(table);
     expect(table).toHaveLength(0);
   });
 });

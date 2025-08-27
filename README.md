@@ -142,7 +142,7 @@ interface INewMusicData extends ISongData {
 
 ---
 
-### getKeywords() => Promise<IKeywordChart>
+### getKeywords() => Promise\<IKeywordChart>
 
 ```javascript
 import { MelonKeywords } from 'melona';

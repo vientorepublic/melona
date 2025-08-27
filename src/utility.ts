@@ -33,6 +33,9 @@ export class HTTP {
 
       const req = request(urlObj, options, (res) => {
         if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+          // Consume response data to free up memory and close socket
+          res.resume();
+          req.destroy();
           reject(
             new Error(
               `Invalid response: ${res.statusCode} ${res.statusMessage}`,
@@ -52,6 +55,7 @@ export class HTTP {
       });
 
       req.on('error', (err) => {
+        req.destroy();
         reject(err);
       });
 
@@ -79,6 +83,8 @@ export class Utility {
 
       const req = request(urlObj, options, (res) => {
         if (res.statusCode && (res.statusCode < 200 || res.statusCode >= 300)) {
+          res.resume();
+          req.destroy();
           reject(
             new Error(
               `Invalid response: ${res.statusCode} ${res.statusMessage}`,
@@ -103,6 +109,7 @@ export class Utility {
       });
 
       req.on('error', (err) => {
+        req.destroy();
         reject(err);
       });
 
