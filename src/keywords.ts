@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio';
-import { Config } from './config';
+import { Config, ConfigOptions } from './config';
 import { HTTP } from './utility';
 
 export interface IKeyword {
@@ -15,8 +15,11 @@ export interface IKeywordChart {
 
 export class MelonKeywords {
   private http: HTTP;
-  constructor() {
-    this.http = new HTTP();
+  private config: Config;
+
+  constructor(options: ConfigOptions = {}) {
+    this.config = new Config(options);
+    this.http = new HTTP(this.config);
   }
 
   public async parseTable(html: string): Promise<IKeywordChart> {
@@ -69,7 +72,7 @@ export class MelonKeywords {
   public async getKeywords(): Promise<IKeywordChart> {
     const params = new URLSearchParams();
     params.append('query', '');
-    const html = await this.http.getHTML(Config.KEYWORD_CHART_URL, params);
+    const html = await this.http.getHTML(this.config.KEYWORD_CHART_URL, params);
     const data = await this.parseTable(html);
     return data;
   }

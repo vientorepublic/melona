@@ -1,7 +1,7 @@
 import { HTTP, Utility } from './utility';
 import type { ISongData, SearchSection } from '.';
 import * as cheerio from 'cheerio';
-import { Config } from './config';
+import { Config, ConfigOptions } from './config';
 
 export interface ISearchParams {
   query: string;
@@ -14,8 +14,13 @@ export interface ISearchSong extends ISongData {
 
 export class MelonSearch {
   private http: HTTP;
-  constructor() {
-    this.http = new HTTP();
+  private utility: Utility;
+  private config: Config;
+
+  constructor(options: ConfigOptions = {}) {
+    this.config = new Config(options);
+    this.http = new HTTP(this.config);
+    this.utility = new Utility(this.config);
   }
 
   public async parseTable(html: string): Promise<ISearchSong[]> {
@@ -60,8 +65,7 @@ export class MelonSearch {
     data.map((e) => {
       songIds.push(e.songNo);
     });
-    const utility = new Utility();
-    const likeCntData = await utility.getLikeCnt(songIds);
+    const likeCntData = await this.utility.getLikeCnt(songIds);
     data.map((e, i) => {
       data[i].likeCnt = likeCntData.contsLike[i].SUMMCNT;
     });
@@ -75,7 +79,7 @@ export class MelonSearch {
     if (section) {
       queryParams.append('section', section);
     }
-    const html = await this.http.getHTML(Config.SEARCH_URL, queryParams);
+    const html = await this.http.getHTML(this.config.SEARCH_URL, queryParams);
     const data = await this.parseTable(html);
     return data;
   }

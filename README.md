@@ -19,6 +19,7 @@
 
 - [Features](#features)
 - [Install](#install)
+- [Configuration](#configuration)
 - [Base Types](#base-types)
 - [API Methods](#api-methods)
   - [searchSong](#searchsongparams-isearchparams--promiseisearchsong)
@@ -40,6 +41,11 @@
   - 멜론 인기 키워드
 - 비동기(async/await) 지원
 - 내장 타입 선언(d.ts) 제공
+- 커스텀 HTTP 설정 지원:
+  - User-Agent 설정
+  - 커스텀 헤더 추가
+  - 재시도 횟수 설정
+  - 타임아웃 시간 설정
 
 ---
 
@@ -47,6 +53,34 @@
 
 ```bash
 npm install melona
+```
+
+---
+
+## Configuration
+
+각 클래스 생성 시 옵션을 전달하여 HTTP 클라이언트의 동작을 커스터마이징할 수 있습니다.
+
+```typescript
+interface ConfigOptions {
+  userAgent?: string; // User-Agent 헤더 (기본값: Chrome 131.0.0)
+  customHeaders?: Record<string, string>; // 추가 헤더
+  retryCount?: number; // 재시도 횟수 (기본값: 3)
+  timeout?: number; // 타임아웃 시간(ms, 기본값: 10000)
+}
+```
+
+### 예시
+
+```javascript
+const melonSearch = new MelonSearch({
+  userAgent: 'MyApp/1.0',
+  customHeaders: {
+    'X-API-Key': 'your-api-key',
+  },
+  retryCount: 5,
+  timeout: 15000,
+});
 ```
 
 ---
@@ -72,10 +106,25 @@ interface ISongData {
 ```javascript
 import { MelonSearch, SearchSection } from 'melona';
 
+// 기본 설정 사용
 const melonSearch = new MelonSearch();
 const data = await melonSearch.searchSong({
   query: '윤하', // 실제 검색어로 치환하세요.
   section: SearchSection.ARTIST, // ALL, ARTIST, SONG, ALBUM
+});
+
+// 커스텀 설정 사용
+const melonSearchWithOptions = new MelonSearch({
+  userAgent: 'MyCustomUserAgent/1.0',
+  timeout: 15000,
+  retryCount: 5,
+  customHeaders: {
+    'X-Custom-Header': 'value',
+  },
+});
+const dataWithOptions = await melonSearchWithOptions.searchSong({
+  query: '윤하',
+  section: SearchSection.ARTIST,
 });
 
 console.log(data);
@@ -106,8 +155,17 @@ interface ISearchSong extends ISongData {
 ```javascript
 import { MelonChart } from 'melona';
 
+// 기본 설정 사용
 const melonChart = new MelonChart();
 const chart = await melonChart.getChart();
+
+// 커스텀 설정 사용
+const melonChartWithOptions = new MelonChart({
+  userAgent: 'MyCustomUserAgent/1.0',
+  timeout: 20000,
+  retryCount: 3,
+});
+const chartWithOptions = await melonChartWithOptions.getChart();
 
 console.log(chart);
 ```
@@ -126,8 +184,18 @@ interface IChartData extends ISongData {
 ```javascript
 import { MelonNewMusic } from 'melona';
 
+// 기본 설정 사용
 const melonNewMusic = new MelonNewMusic();
 const table = await melonNewMusic.getTable();
+
+// 커스텀 설정 사용
+const melonNewMusicWithOptions = new MelonNewMusic({
+  customHeaders: {
+    Authorization: 'Bearer token',
+  },
+  timeout: 10000,
+});
+const tableWithOptions = await melonNewMusicWithOptions.getTable();
 
 console.log(table);
 ```
@@ -147,8 +215,17 @@ interface INewMusicData extends ISongData {
 ```javascript
 import { MelonKeywords } from 'melona';
 
+// 기본 설정 사용
 const melonKeywords = new MelonKeywords();
 const keywords = await melonKeywords.getKeywords();
+
+// 커스텀 설정 사용
+const melonKeywordsWithOptions = new MelonKeywords({
+  userAgent: 'CustomBot/1.0',
+  retryCount: 2,
+  timeout: 8000,
+});
+const keywordsWithOptions = await melonKeywordsWithOptions.getKeywords();
 
 console.log(keywords.trending); // 실시간 급상승 키워드
 console.log(keywords.popular); // 인기 키워드

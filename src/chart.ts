@@ -1,7 +1,7 @@
 import { HTTP, Utility } from './utility';
 import type { ISongData } from '.';
 import * as cheerio from 'cheerio';
-import { Config } from './config';
+import { Config, ConfigOptions } from './config';
 
 export interface IChartData extends ISongData {
   rank: number;
@@ -10,8 +10,13 @@ export interface IChartData extends ISongData {
 
 export class MelonChart {
   private http: HTTP;
-  constructor() {
-    this.http = new HTTP();
+  private utility: Utility;
+  private config: Config;
+
+  constructor(options: ConfigOptions = {}) {
+    this.config = new Config(options);
+    this.http = new HTTP(this.config);
+    this.utility = new Utility(this.config);
   }
 
   public async parseChart(html: string): Promise<IChartData[]> {
@@ -59,8 +64,7 @@ export class MelonChart {
     chart.map((e) => {
       songIds.push(e.songNo);
     });
-    const utility = new Utility();
-    const likeCntData = await utility.getLikeCnt(songIds);
+    const likeCntData = await this.utility.getLikeCnt(songIds);
     chart.map((e, i) => {
       chart[i].likeCnt = likeCntData.contsLike[i].SUMMCNT;
     });
@@ -68,7 +72,7 @@ export class MelonChart {
   }
 
   public async getChart(): Promise<IChartData[]> {
-    const html = await this.http.getHTML(Config.CHART_URL);
+    const html = await this.http.getHTML(this.config.CHART_URL);
     const chart = await this.parseChart(html);
     return chart;
   }
