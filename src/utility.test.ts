@@ -1,7 +1,9 @@
 import { HTTP, Utility } from './utility';
+import { Config } from './config';
 
-const http = new HTTP();
-const utility = new Utility();
+const config = new Config();
+const http = new HTTP(config);
+const utility = new Utility(config);
 
 describe('getLikeCnt', () => {
   test('should be return like count', async () => {
