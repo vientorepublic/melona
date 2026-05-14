@@ -348,7 +348,7 @@ interface INewMusicData extends ISongData {
 
 ---
 
-### getKeywords() => Promise<IKeywordChart>
+### getKeywords() => Promise\<IKeywordChart>
 
 **멜론 인기 키워드 차트를 가져오는 메서드입니다.**
 
